@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+            *{
+                margin: 0%;
+                padding: 0%;
+                font-family: "Roboto", sans-serif;
+            }
+            
+            
+            .containerr{
+                
+                height: 85vh;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                
+                align-items: center;
+            }
+            .form{
+                margin-top: 4%;
+                background-color: #9eb5e0;
+                height: 80%;
+                width: 30%;
+                border: 1px solid black;
+                border-radius: 5%;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            #heading{
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: xx-large;
+                margin-top: 6%;
+                margin-bottom: 1%;
+                
+            }
+            .in{
+                height: 100%;
+                width: 70%;
+                
+                display: flex;
+                box-sizing: border-box;
+                padding: 2% 2% 10% 2%;
+                margin-top: 1%;
+                flex-direction: column;
+
+            }
+            label{
+                margin-top: 1%;
+                
+            }
+            .input{
+                height: 6%;
+                width: 100%;
+                border: 1px solid black;
+                border-radius: 5px;
+            }
+            .ans{
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: medium;
+                margin-bottom: 2%;
+            }
+            #feedback{
+                height: 10%;
+                width: 100%;
+                border: 1px solid black;
+                border-radius: 5px;
+            }
+            #button{
+                margin-top: 8%;
+                font-size: medium;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                background-color: #1B9071;
+                align-self: center;
+                width: 40%;
+                height: 7%;
+                border: 1px solid black;
+                border-radius: 20px;
+            }
+            #feedback::placeholder,.input::placeholder {
+                color: #999; /* Change the text color */
+                font-family: Verdana, Geneva, Tahoma, sans-serif; /* Make it italic */
+                font-size: 15px; /* Set the font size */
+
+                padding-left: 5%;
+            }
+            
+            #list{
+                list-style-type: none;
+            }
+            .mess{
+                height: 5%;
+                margin-bottom: auto;
+                box-sizing: border-box;
+                color: green;
+            }
+        </style>
+        <title>Document</title>
+    </head>
+
+    <body>    
+        <header>
+            {% include 'navbar.html' %}
+        </header>
+        <div class="containerr">
+            
+            
+            <div class="form">
+                <div class="mess">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li id="list"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <h1 id="heading">Feedback Form</h1>
+                <form class="in" action="/cr/success/" method="post">
+                    {% csrf_token %}
+                    <label class="ans" for="name">Name:</label>
+                    
+                    <input style="padding-left:5% ;" type="text" id="name" class="input" name="name" placeholder="Enter your name"required>
+            
+                    <label class="ans" for="email">Email:</label>
+                    
+                    <input style="padding-left:5% ;" type="email" class="input" id="email" name="email" placeholder="Enter email" required>
+
+                    <label class="ans" for="course">Course:</label>
+                    
+                    <input style="padding-left:5% ;" type="text" class="input" id="course" name="course" placeholder="Enter your course" required>
+
+                    <label class="ans" for="year">Year:</label>
+                    
+                    <input style="padding-left:5% ;" type="number" class="input" id="year" placeholder="Enter your year" name="year" required>
+            
+                    <label class="ans" for="feedback">Feedback:</label>
+                    
+                    <textarea style="padding-left:5% ;" id="feedback" name="feedback" rows="5" placeholder="Enter feedback" required></textarea>
+            
+                    <input id="button" type="submit" value="Submit">
+                </form>
+                
+                <!--<form class="in" method="post">
+                    {% csrf_token %}
+                    <label class="ans" for="name">Name:</label>
+                    
+                    <input type="text" id="name" class="input" name="name" placeholder="Enter your name"required><br>
+            
+                    <label class="ans" for="email">Email:</label>
+                    
+                    <input type="email" class="input" id="email" name="email" placeholder="Enter email" required><br>
+
+                    <label class="ans" for="course">Course:</label>
+                    
+                    <input type="text" class="input" id="course" name="course" placeholder="Enter your course" required><br>
+
+                    <label class="ans" for="year">Year:</label>
+                    
+                    <input type="number" class="input" id="year" placeholder="Enter your year" name="year" required><br>
+            
+                    <label class="ans" for="feedback">Feedback:</label>
+                    
+                    <textarea id="feedback" name="feedback" rows="5" placeholder="Enter feedback" required></textarea><br>
+            
+                    <input id="button" type="submit" value="Submit">
+                    {% comment %} <label class="ans " for="{{ form.name.id_for_label }}" >Name:</label>
+                    <div class="input">{{ form.name }}</div>
+                    
+                    <label class="ans" for="{{ form.email.id_for_label }}">Email:</label>
+                    {{ form.email }}
+                    
+                    <label class="ans" for="{{ form.course.id_for_label }}">Course:</label>
+                    {{ form.course }}
+                    
+                    <label class="ans" for="{{ form.year.id_for_label }}">Year:</label>
+                    {{ form.year }}
+                    
+                    <label class="ans" for="{{ form.feedback.id_for_label }}">Feedback:</label>
+                    {{ form.feedback }}
+                    
+                    <input id="button" type="submit" value="Submit"> {% endcomment %}
+                </form> -->
+                
+                
+            </div>
+            
+        </div>
+        {% include 'footer.html' %}
+        <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+        
+
+    </body>
+
+</html>
+

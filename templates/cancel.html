@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Update Employee</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+            crossorigin="anonymous">
+    </head>
+    <body>
+
+        {% include 'cr/navbar.html' %}
+
+        <h1 class="text-center my-3 mt-5">Cancel Class</h1>
+
+        <div class="container " style="height: 68.3vh;">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+
+                    <div class="card" style="border:5px solid #9eb5e0; height: 50vh;">
+                        <div class="card-body">
+                            
+
+                                <form  style="padding: 3% 10%;" action="/cr/home/do-cancel/{{et.id}}" method="POST">
+                                    {% csrf_token %}
+                                    
+                                    <div class="mb-3">
+                                        <h3>{{et.subject}}</h3>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                    <h3>{{et.name}}</h3>
+                                </div>
+
+                                <div class="mb-3">
+                                    <h3>{{et.teacher}}</h3>
+                                </div>
+                                <br>
+                                <div class="mb-3 form-check">
+                                    <label for="status">Status</label>
+                                    <input type="checkbox"
+                                    id="status"
+                                    class="form-check-input"
+                                    name="et_status"
+                                    value="{{et.status}}"
+                                    {%if et.status %} checked {%endif%}>
+                                </div>
+                                
+                                <div class="container text-center" style="margin-top: 5%;">
+                                    <button class="btn btn-success">
+                                        Cancel
+                                    </button>
+                                </div>
+                                
+                            </form>
+                    
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% include 'footer.html' %}
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    </body>
+</html>

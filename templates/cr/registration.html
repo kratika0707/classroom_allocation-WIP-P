@@ -1,0 +1,91 @@
+<!-- registration.html -->
+<html>
+<head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .floating-form {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #b8dbef;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body style="background-color: #f1f6f9;">
+    {% include 'cr/navbar.html' %}
+    
+
+    <div class="container mb-2">
+        <h2 style="text-align: center;">Room Booking</h2>
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <div class="card" style="background-color: #9eb5e0; ">
+                    <div class="card-body" style="padding:4.4% 10%">
+                        <form action="{% url 'registration' room=room id=tid.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="pb-2">
+                                <label style="float:left;" for="subject">Subject:</label>
+                                <input style="font-size: 0.8rem;" type="text" class="form-control" name="subject"
+                                    id="subject"></textarea>
+                            </div>
+                            <div class="pb-2">
+                                <label style="float:left;" for="teacher">Teacher:</label>
+                                <input style="font-size: 0.8rem;" type="text" class="form-control w-100" name="teacher"
+                                    id="teacher" ></textarea>
+                            </div>
+                            <div class="pb-2">
+                                <label style="float:left;" for="course">Course:</label>
+                                <input style="font-size: 0.8rem;" type="text" class="form-control w-100" name="course"
+                                    id="course" value="{{tid.course}}" readonly></textarea>
+                            </div>
+                            <div class="pb-2">
+                                <label style="float:left;" for="day">Day:</label>
+                                <input style="font-size: 0.8rem;" type="text" class="form-control w-100" name="day"
+                                    id="day" value="{{tid.day}}" readonly></textarea>
+                            </div>
+                            <div class="pb-2">
+                                <label style="float:left;" for="year">Year:</label>
+                                <input style="font-size: 0.8rem;" type="text" class="form-control w-100" name="year"
+                                    id="year" value="{{tid.year}}" readonly></textarea>
+                            </div>
+                            <div class="pb-2">
+                                <label style="float:left;" for="room">Room:</label>
+                                <input style="font-size: 0.8rem;" type="text" class="form-control w-100" name="room"
+                                    id="room" value="{{room}}" readonly></textarea>
+                            </div>
+                            <div class="pb-2">
+                                <label style="float:left;" for="time">Time:</label>
+                                <input style="font-size: 0.8rem;" type="text" class="form-control w-100" name="time"
+                                    id="time" value ="{{tid.time}}" readonly></textarea>
+                            </div>
+                            
+                            <!-- <div class="form-group pb-4">
+                                <label for="exampleFormControlTextarea1">Solution:</label>
+                                <textarea class="form-control" name="solution"
+                                    id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div> -->
+                            <center>
+                                <button class="pt-2 mt-4 btn btn-primary">Submit</button>
+                            </center>
+    
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</body>
+</html>
